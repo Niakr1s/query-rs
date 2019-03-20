@@ -24,7 +24,7 @@ where
     fn eval(&self, tq: &TextQuery) -> QueryResult {
         let qr = self.query.eval(&tq);
         let all = tq.all_lines();
-        let res = &all - &*qr.result.borrow();
+        let res = &all - &qr.result;
         QueryResult::from(Rc::clone(&qr.text), res, self.rep())
     }
     fn rep(&self) -> String {

@@ -1,5 +1,4 @@
 use core::cell::RefCell;
-use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::Read;
 use std::io::Result;
@@ -26,11 +25,7 @@ impl TextQuery {
         for (counter, line) in text.iter().enumerate() {
             for word in line.split_whitespace() {
                 let word = trim_word(word).to_owned();
-                words
-                    .entry(word)
-                    .or_insert_with(|| Rc::new(RefCell::new(Set::new())))
-                    .borrow_mut()
-                    .insert(counter);
+                words.entry(word).or_insert_with(Set::new).insert(counter);
             }
         }
         Ok(TextQuery { text, words })

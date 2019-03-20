@@ -15,7 +15,7 @@ impl WordQuery {
 impl Query for WordQuery {
     fn eval(&self, tq: &TextQuery) -> QueryResult {
         let text = Rc::clone(&tq.text);
-        let result = Rc::clone(&tq.words[&self.word]);
+        let result = tq.words[&self.word].clone();
         QueryResult::from(text, result, self.rep())
     }
     fn rep(&self) -> String {

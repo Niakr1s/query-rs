@@ -6,12 +6,12 @@ use crate::types::*;
 
 pub struct QueryResult {
     pub text: Rc<Text>,
-    pub result: Rc<RefCell<Set>>,
+    pub result: Set,
     query: String,
 }
 
 impl QueryResult {
-    pub fn from(text: Rc<Text>, result: Rc<RefCell<Set>>, query: String) -> QueryResult {
+    pub fn from(text: Rc<Text>, result: Set, query: String) -> QueryResult {
         QueryResult {
             text,
             result,
@@ -23,12 +23,7 @@ impl QueryResult {
 impl fmt::Display for QueryResult {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         writeln!(f, "{}:", self.query,)?;
-        let mut sorted = self
-            .result
-            .borrow()
-            .clone()
-            .into_iter()
-            .collect::<Vec<usize>>();
+        let mut sorted = self.result.clone().into_iter().collect::<Vec<usize>>();
         sorted[..].sort();
         for line_no in sorted {
             writeln!(f, "{}: {}", line_no, self.text[line_no])?;
