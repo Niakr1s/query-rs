@@ -11,6 +11,15 @@ where
     query: Q,
 }
 
+impl<Q> Query<Q>
+where
+    Q: QueryCommon,
+{
+    pub fn new(s: &str) -> Query<Q> {
+        unimplemented!() // todo rewrite parsing from c++ query
+    }
+}
+
 impl<Q> QueryCommon for Query<Q>
 where
     Q: QueryCommon,
