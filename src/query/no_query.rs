@@ -31,3 +31,20 @@ where
         format!("~{}", self.query.rep())
     }
 }
+
+#[cfg(test)]
+mod test {
+    use crate::prelude::*;
+    #[test]
+    fn word_query() {
+        let tq = TextQuery::from(
+            r###"Hello this, 
+        wonderful world!!!!?
+        And bye xD"###,
+        );
+        let wq = WordQuery::new("world");
+        let nq = NoQuery::new(wq);
+        let res = nq.eval(&tq);
+        assert!(res.result.contains(&0) && res.result.contains(&2) && res.result.len() == 2);
+    }
+}

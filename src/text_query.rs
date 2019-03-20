@@ -48,6 +48,7 @@ mod test {
     fn alice_txt_len() {
         let p = Path::new("texts/alice.txt");
         let tq = TextQuery::open(&p);
+        assert!(tq.is_ok());
         assert_eq!(tq.unwrap().text.len(), 3736);
     }
 

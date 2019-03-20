@@ -22,3 +22,19 @@ impl Query for WordQuery {
         self.word.clone()
     }
 }
+
+#[cfg(test)]
+mod test {
+    use crate::prelude::*;
+    #[test]
+    fn word_query() {
+        let tq = TextQuery::from(
+            r###"Hello this, 
+        wonderful world!!!!?
+        And bye xD"###,
+        );
+        let wq = WordQuery::new("world");
+        let res = wq.eval(&tq);
+        assert!(res.result.contains(&1) && res.result.len() == 1);
+    }
+}
