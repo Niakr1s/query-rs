@@ -1,6 +1,4 @@
-use crate::query::Query;
-use crate::query_result::QueryResult;
-use crate::text_query::TextQuery;
+use crate::prelude::*;
 use std::rc::Rc;
 
 pub struct WordQuery {

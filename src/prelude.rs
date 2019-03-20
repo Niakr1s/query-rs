@@ -1,3 +1,5 @@
+pub use crate::query::no_query::NoQuery;
 pub use crate::query::word_query::WordQuery;
 pub use crate::query::Query;
+pub use crate::query_result::QueryResult;
 pub use crate::text_query::TextQuery;
