@@ -4,6 +4,7 @@ pub mod prelude;
 mod query;
 mod query_result;
 mod text_query;
+mod types;
 
 use std::path::Path;
 

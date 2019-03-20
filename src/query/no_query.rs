@@ -22,9 +22,10 @@ where
     Q: Query,
 {
     fn eval(&self, tq: &TextQuery) -> QueryResult {
-        let result = self.query.eval(&tq);
-        unimplemented!()
-        // QueryResult::from(text, result, self.rep())
+        let qr = self.query.eval(&tq);
+        let all = tq.all_lines();
+        let res = &all - &*qr.result.borrow();
+        QueryResult::from(Rc::clone(&qr.text), res, self.rep())
     }
     fn rep(&self) -> String {
         format!("~{}", self.query.rep())

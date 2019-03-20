@@ -6,9 +6,7 @@ use std::io::Result;
 use std::path::Path;
 use std::rc::Rc;
 
-type Text = Vec<String>;
-type Set = HashSet<usize>;
-type Words = HashMap<String, Rc<RefCell<Set>>>;
+use crate::types::*;
 
 pub struct TextQuery {
     pub text: Rc<Text>,
@@ -37,8 +35,8 @@ impl TextQuery {
         }
         Ok(TextQuery { text, words })
     }
-    pub fn text_len(&self) -> usize {
-        self.text.len()
+    pub fn all_lines(&self) -> Set {
+        (0..self.text.len()).collect::<Set>()
     }
 }
 

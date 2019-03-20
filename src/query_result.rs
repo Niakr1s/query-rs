@@ -1,20 +1,17 @@
 use core::cell::RefCell;
-use std::collections::HashSet;
 use std::fmt;
 use std::rc::Rc;
 
+use crate::types::*;
+
 pub struct QueryResult {
-    text: Rc<Vec<String>>,
-    result: Rc<RefCell<HashSet<usize>>>,
+    pub text: Rc<Text>,
+    pub result: Rc<RefCell<Set>>,
     query: String,
 }
 
 impl QueryResult {
-    pub fn from(
-        text: Rc<Vec<String>>,
-        result: Rc<RefCell<HashSet<usize>>>,
-        query: String,
-    ) -> QueryResult {
+    pub fn from(text: Rc<Text>, result: Rc<RefCell<Set>>, query: String) -> QueryResult {
         QueryResult {
             text,
             result,
