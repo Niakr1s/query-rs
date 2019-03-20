@@ -11,8 +11,8 @@ type Set = HashSet<usize>;
 type Words = HashMap<String, Rc<RefCell<Set>>>;
 
 pub struct TextQuery {
-    text: Rc<Text>,
-    words: Words,
+    pub text: Rc<Text>,
+    pub words: Words,
 }
 
 impl TextQuery {

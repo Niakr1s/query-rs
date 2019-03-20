@@ -1,12 +1,14 @@
 use crate::query_result::QueryResult;
 use crate::text_query::TextQuery;
 
-trait Query {
+use std::rc::Rc;
+
+pub trait Query {
     fn eval(&self, tq: &TextQuery) -> QueryResult;
     fn rep(&self) -> String;
 }
 
-struct WordQuery {
+pub struct WordQuery {
     word: String,
 }
 
@@ -19,7 +21,9 @@ impl WordQuery {
 
 impl Query for WordQuery {
     fn eval(&self, tq: &TextQuery) -> QueryResult {
-        QueryResult::new() // todo real eval
+        let text = Rc::clone(&tq.text);
+        let result = Rc::clone(&tq.words[&self.word]);
+        QueryResult::from(text, result, self.rep())
     }
     fn rep(&self) -> String {
         self.word.clone()

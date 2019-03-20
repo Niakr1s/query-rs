@@ -6,8 +6,12 @@ mod text_query;
 
 use std::path::Path;
 
+use query::{Query, WordQuery};
 use text_query::TextQuery;
 
 fn main() {
-    let tq = TextQuery::from(Path::new("alice.txt"));
+    let tq = TextQuery::from(Path::new("alice.txt")).expect("no alice.txt file");
+    let query = WordQuery::new("Alice");
+    let res = query.eval(&tq);
+    println!("{}", res);
 }
