@@ -3,23 +3,23 @@ use std::rc::Rc;
 
 pub struct NoQuery<Q>
 where
-    Q: Query,
+    Q: QueryCommon,
 {
     query: Q,
 }
 
 impl<Q> NoQuery<Q>
 where
-    Q: Query,
+    Q: QueryCommon,
 {
     pub fn new(query: Q) -> NoQuery<Q> {
         NoQuery { query }
     }
 }
 
-impl<Q> Query for NoQuery<Q>
+impl<Q> QueryCommon for NoQuery<Q>
 where
-    Q: Query,
+    Q: QueryCommon,
 {
     fn eval(&self, tq: &TextQuery) -> QueryResult {
         let qr = self.query.eval(&tq);

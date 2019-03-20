@@ -12,7 +12,7 @@ impl WordQuery {
     }
 }
 
-impl Query for WordQuery {
+impl QueryCommon for WordQuery {
     fn eval(&self, tq: &TextQuery) -> QueryResult {
         let text = Rc::clone(&tq.text);
         let result = tq.words[&self.word].clone();
