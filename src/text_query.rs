@@ -37,6 +37,9 @@ impl TextQuery {
         }
         Ok(TextQuery { text, words })
     }
+    pub fn text_len(&self) -> usize {
+        self.text.len()
+    }
 }
 
 fn trim_word(s: &str) -> &str {
