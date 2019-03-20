@@ -1,14 +1,17 @@
+use core::cell::RefCell;
 use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::Read;
 use std::io::Result;
 use std::path::Path;
+use std::rc::Rc;
 
 type Text = Vec<String>;
-type Words = HashMap<String, HashSet<usize>>;
+type Set = HashSet<usize>;
+type Words = HashMap<String, Rc<RefCell<Set>>>;
 
 pub struct TextQuery {
-    text: Text,
+    text: Rc<Text>,
     words: Words,
 }
 
@@ -20,13 +23,15 @@ impl TextQuery {
             f.read_to_string(&mut content)?;
             content.lines().map(String::from).collect::<Text>()
         };
-        let mut words = Words::default();
+        let text = Rc::new(text);
+        let mut words = Words::new();
         for (counter, line) in text.iter().enumerate() {
             for word in line.split_whitespace() {
                 let word = trim_word(word).to_owned();
                 words
                     .entry(word)
-                    .or_insert_with(HashSet::new)
+                    .or_insert_with(|| Rc::new(RefCell::new(Set::new())))
+                    .borrow_mut()
                     .insert(counter);
             }
         }

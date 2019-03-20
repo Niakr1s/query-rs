@@ -4,4 +4,10 @@ mod query;
 mod query_result;
 mod text_query;
 
-fn main() {}
+use std::path::Path;
+
+use text_query::TextQuery;
+
+fn main() {
+    let tq = TextQuery::from(Path::new("alice.txt"));
+}

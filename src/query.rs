@@ -19,7 +19,7 @@ impl WordQuery {
 
 impl Query for WordQuery {
     fn eval(&self, tq: &TextQuery) -> QueryResult {
-        QueryResult::new() // todo apple real eval
+        QueryResult::new() // todo real eval
     }
     fn rep(&self) -> String {
         self.word.clone()
